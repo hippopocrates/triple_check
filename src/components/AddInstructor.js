@@ -66,47 +66,65 @@ class AddInstructor extends React.Component {
     return (
       <div>
         <h3>can't find your instructor?</h3>
-        <button>add here</button>
+        <button className="btn btn-primary">add them!</button>
         <form onSubmit={this.onSubmit}>
-          <input
-            type="text"
-            placeholder="name"
-            value={this.state.name}
-            onChange={this.onChangeName}
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="title"
-            value={this.state.title}
-            onChange={this.onChangeTitle}
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="rate"
-            value={this.state.rate}
-            onChange={this.onChangeRate}
-          />
-          <br />
-          <input
-            type="number"
-            placeholder="rating"
-            min="1"
-            max="5"
-            style={{ width: "60px" }}
-            value={this.state.rating}
-            onChange={this.onChangeRating}
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="review"
-            value={this.state.review}
-            onChange={this.onChangeReview}
-          />
-          <br />
-          <input type="submit" />
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="name"
+              className="form-control"
+              value={this.state.name}
+              onChange={this.onChangeName}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="title"
+              className="form-control"
+              value={this.state.title}
+              onChange={this.onChangeTitle}
+            />
+          </div>
+
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="rate"
+              className="form-control"
+              value={this.state.rate}
+              onChange={this.onChangeRate}
+            />
+          </div>
+
+          <div className="form-group">
+            <label style={{ marginRight: "10px" }}>rating:</label>
+
+            <input
+              type="number"
+              placeholder="rating"
+              className="form-control"
+              min="1"
+              max="5"
+              style={{ width: "60px", display: "inline" }}
+              value={this.state.rating}
+              onChange={this.onChangeRating}
+            />
+          </div>
+
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="review"
+              className="form-control"
+              value={this.state.review}
+              onChange={this.onChangeReview}
+            />
+          </div>
+
+          <button type="submit" className="btn btn-primary">
+            submit
+          </button>
         </form>
       </div>
     );
