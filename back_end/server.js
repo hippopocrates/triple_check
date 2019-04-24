@@ -22,7 +22,7 @@ connection.once("open", function() {
 });
 
 instructorRoutes.route("/").get(function(req, res) {
-  Instructor.find().exec(function(err, instructors) {
+  Instructor.find(function(err, instructors) {
     if (err) {
       console.log(err);
     } else {
@@ -39,13 +39,10 @@ instructorRoutes.route("/:id").get(function(req, res) {
 });
 
 instructorRoutes.route("/add").post(function(req, res) {
-  console.log("req.query:", req.query);
-  let instructor = new Instructor(req.query);
+  let instructor = new Instructor(req.body);
   instructor
     .save()
     .then(instructor => {
-      console.log("instructor:", instructor);
-
       res.status(200).json({ instructor: "instructor added successfully" });
     })
     .catch(err => {
@@ -53,28 +50,28 @@ instructorRoutes.route("/add").post(function(req, res) {
     });
 });
 
-instructorRoutes.route("/update/:id").post(function(req, res) {
-  Instructor.findById(req.params.id, function(err, instructor) {
-    if (!instructor) {
-      res.status(400).send("data not found");
-    } else {
-      instructor.name = req.body.name;
-      instructor.title = req.body.title;
-      instructor.rate = req.body.rate;
-      instructor.rating = req.body.rating;
-      instructor.review = req.body.review;
-
-      instructor
-        .save()
-        .then(instructor => {
-          res.json("instructor updated");
-        })
-        .catch(err => {
-          res.status(400).send("update not possible");
-        });
-    }
-  });
-});
+// instructorRoutes.route("/update/:id").post(function(req, res) {
+//   Instructor.findById(req.params.id, function(err, instructor) {
+//     if (!instructor) {
+//       res.status(400).send("data not found");
+//     } else {
+//       instructor.name = req.body.name;
+//       instructor.title = req.body.title;
+//       instructor.rate = req.body.rate;
+//       instructor.rating = req.body.rating;
+//       instructor.review = req.body.review;
+//
+//       instructor
+//         .save()
+//         .then(instructor => {
+//           res.json("instructor updated");
+//         })
+//         .catch(err => {
+//           res.status(400).send("update not possible");
+//         });
+//     }
+//   });
+// });
 
 app.use("/instructors", instructorRoutes);
 

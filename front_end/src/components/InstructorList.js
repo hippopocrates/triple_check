@@ -3,13 +3,22 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Instructor = props => (
-  <tr>
-    <td>{props.instructor.name}</td>
-    <td>{props.instructor.title}</td>
-    <td>{props.instructor.rate}</td>
-    <td>{props.instructor.rating}</td>
-    <td>{props.instructor.review}</td>
-  </tr>
+  <div className="card">
+    <div className="image">
+      <img src={props.instructor.avatar} alt={props.instructor.name} />
+    </div>
+
+    <div className="content">
+      <div className="header">{props.instructor.name}</div>
+      <div className="meta">{props.instructor.title}</div>
+
+      <div className="description">{props.instructor.review}</div>
+    </div>
+    <div className="extra">
+      Rating:
+      <div className="ui star rating" data-rating="3" data-max-rating="5" />
+    </div>
+  </div>
 );
 
 class InstructorList extends React.Component {
@@ -22,7 +31,7 @@ class InstructorList extends React.Component {
 
   componentDidMount() {
     axios
-      .get("http:localhost:4000/instructors/")
+      .get("http://localhost:4000/instructors/")
       .then(res => {
         this.setState({ instructors: res.data });
       })
@@ -38,21 +47,7 @@ class InstructorList extends React.Component {
   }
   render() {
     return (
-      <div>
-        <h3>Instructor List</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Title</th>
-              <th>Rate</th>
-              <th>Rating</th>
-              <th>Review</th>
-            </tr>
-          </thead>
-          // <tbody>{this.instructorList()}</tbody>
-        </table>
-      </div>
+      <div className="ui three stackable cards">{this.instructorList()}</div>
     );
   }
 }

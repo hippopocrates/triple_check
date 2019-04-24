@@ -6,7 +6,8 @@ let Instructor = new Schema({
   title: { type: String },
   rate: { type: Number },
   rating: { type: Number },
-  review: { type: String }
+  review: { type: String },
+  avatar: { type: String }
 });
 
 module.exports = mongoose.model("Instructor", Instructor);

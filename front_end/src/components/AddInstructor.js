@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import faker from "faker";
 
 class AddInstructor extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class AddInstructor extends React.Component {
       title: "",
       rate: 0,
       rating: 0,
-      review: ""
+      review: "",
+      avatar: ""
     };
   }
 
@@ -58,7 +60,8 @@ class AddInstructor extends React.Component {
       title: this.state.title,
       rate: this.state.rate,
       rating: this.state.rating,
-      review: this.state.review
+      review: this.state.review,
+      avatar: faker.image.avatar()
     };
 
     axios
@@ -79,43 +82,43 @@ class AddInstructor extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
+        <form className="ui form" onSubmit={this.onSubmit}>
+          <div className="field">
+            <label>Name</label>
             <input
               type="text"
-              placeholder="name"
+              placeholder="Name"
               className="form-control"
               value={this.state.name}
               onChange={this.onChangeName}
             />
           </div>
-          <div className="form-group">
+          <div className="field">
+            <label>Job Title</label>
             <input
               type="text"
-              placeholder="title"
+              placeholder="Job Title"
               className="form-control"
               value={this.state.title}
               onChange={this.onChangeTitle}
             />
           </div>
 
-          <div className="form-group">
+          <div className="field">
+            <label>Hourly Rate</label>
             <input
               type="number"
-              placeholder="rate"
-              className="form-control"
               value={this.state.rate}
               onChange={this.onChangeRate}
             />
           </div>
 
-          <div className="form-group">
-            <label style={{ marginRight: "10px" }}>rating:</label>
+          <div className="field">
+            <label style={{ marginRight: "10px" }}>Rating</label>
 
             <input
               type="number"
               placeholder="rating"
-              className="form-control"
               min="1"
               max="5"
               style={{ width: "60px", display: "inline" }}
@@ -124,17 +127,18 @@ class AddInstructor extends React.Component {
             />
           </div>
 
-          <div className="form-group">
-            <input
+          <div className="field">
+            <label>Review</label>
+            <textarea
+              rows="2"
               type="text"
-              placeholder="review"
-              className="form-control"
+              placeholder="Review"
               value={this.state.review}
               onChange={this.onChangeReview}
             />
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="ui button">
             submit
           </button>
         </form>
