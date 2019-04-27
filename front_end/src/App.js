@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import Header from "./components/Header";
 import AddInstructor from "./components/AddInstructor";
 // import InstructorProfile from "./components/InstructorProfile";
 import InstructorList from "./components/InstructorList";
