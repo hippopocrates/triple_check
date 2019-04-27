@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import faker from "faker";
+import { Redirect } from "react-router-dom";
 
 class AddInstructor extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class AddInstructor extends React.Component {
       rate: 0,
       rating: 0,
       review: "",
-      avatar: ""
+      avatar: "",
+      redirect: false
     };
   }
 
@@ -49,12 +51,6 @@ class AddInstructor extends React.Component {
   onSubmit = e => {
     e.preventDefault();
 
-    console.log(this.state.name);
-    console.log(this.state.title);
-    console.log(this.state.rate);
-    console.log(this.state.rating);
-    console.log(this.state.review);
-
     const newInstructor = {
       name: this.state.name,
       title: this.state.title,
@@ -70,16 +66,22 @@ class AddInstructor extends React.Component {
         console.log("axios res.data", res.data);
       });
 
-    this.setState = {
+    this.setState({
       name: "",
       title: "",
       rate: "",
       rating: 0,
-      review: ""
-    };
+      review: "",
+      redirect: true
+    });
   };
 
   render() {
+    let test;
+    if (this.state.redirect) {
+      test = <Redirect to="/" />;
+    }
+
     return (
       <div>
         <form className="ui form" onSubmit={this.onSubmit}>
@@ -137,11 +139,11 @@ class AddInstructor extends React.Component {
               onChange={this.onChangeReview}
             />
           </div>
-
           <button type="submit" className="ui button">
             submit
           </button>
         </form>
+        {test}
       </div>
     );
   }
