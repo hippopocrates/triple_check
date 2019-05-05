@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+import { Image } from "semantic-ui-react";
+
 class InstructorProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -37,8 +39,8 @@ class InstructorProfile extends React.Component {
   render() {
     return (
       <div>
-        <h1> instructor profile</h1>
         <h2>{this.state.name}</h2>
+        <Image src={this.state.avatar} size="medium" circular />
       </div>
     );
   }

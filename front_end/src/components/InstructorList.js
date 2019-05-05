@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 
+import { Rating } from "semantic-ui-react";
+
 import InstructorProfile from "./InstructorProfile";
 
 const Instructor = props => (
@@ -26,7 +28,12 @@ const Instructor = props => (
     </div>
     <div className="extra">
       Rating:
-      <div className="ui star rating" data-rating="3" data-max-rating="5" />
+      <Rating
+        icon="star"
+        defaultRating={props.instructor.rating}
+        maxRating={5}
+        disabled
+      />
     </div>
   </div>
 );
