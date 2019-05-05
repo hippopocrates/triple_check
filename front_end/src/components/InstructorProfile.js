@@ -1,7 +1,15 @@
 import React from "react";
 import axios from "axios";
 
-import { Image } from "semantic-ui-react";
+import {
+  Image,
+  Divider,
+  Header,
+  Segment,
+  Button,
+  Comment,
+  Form
+} from "semantic-ui-react";
 
 class InstructorProfile extends React.Component {
   constructor(props) {
@@ -38,10 +46,17 @@ class InstructorProfile extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>{this.state.name}</h2>
-        <Image src={this.state.avatar} size="medium" circular />
-      </div>
+      <Segment>
+        <Image src={this.state.avatar} size="medium" floated="left" circular />
+
+        <Divider clearing />
+
+        <Comment.Group>
+          <Header as="h2">Reviews</Header>
+
+          <Comment />
+        </Comment.Group>
+      </Segment>
     );
   }
 }

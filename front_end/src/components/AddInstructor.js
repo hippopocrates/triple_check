@@ -77,9 +77,9 @@ class AddInstructor extends React.Component {
   };
 
   render() {
-    let test;
+    let redirect;
     if (this.state.redirect) {
-      test = <Redirect to="/" />;
+      redirect = <Redirect to="/" />;
     }
 
     return (
@@ -143,7 +143,7 @@ class AddInstructor extends React.Component {
             submit
           </button>
         </form>
-        {test}
+        {redirect}
       </div>
     );
   }

@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-let Instructor = require("./instructorModel");
+let Instructor = require("./models/instructorModel");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -36,6 +36,10 @@ instructorRoutes.route("/:id").get(function(req, res) {
   Instructor.findById(req.params.id, function(err, instructor) {
     res.json(instructor);
   });
+});
+
+instructorRoutes.route("/:id").post(function(req, res) {
+  Instructor.findById(req.params.id, function(err, review) {});
 });
 
 instructorRoutes.route("/add").post(function(req, res) {
