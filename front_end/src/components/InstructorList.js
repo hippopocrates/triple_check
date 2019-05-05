@@ -1,9 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 import axios from "axios";
 
+import InstructorProfile from "./InstructorProfile";
+
 const Instructor = props => (
-  <div className="card">
+  <div
+    onClick={() => (window.location = `/users/${props.instructor._id}`)}
+    className="card"
+  >
     <div className="image">
       <img src={props.instructor.avatar} alt={props.instructor.name} />
     </div>

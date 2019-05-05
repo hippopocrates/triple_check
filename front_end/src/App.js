@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+import { Container } from "semantic-ui-react";
+
 import AddInstructor from "./components/AddInstructor";
-// import InstructorProfile from "./components/InstructorProfile";
+import InstructorProfile from "./components/InstructorProfile";
 import InstructorList from "./components/InstructorList";
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div className="ui container">
+        <Container>
           <div className="ui inverted segment">
             <div className="ui inverted secondary menu">
               <Link className="active item" to="/">
@@ -33,7 +35,8 @@ class App extends Component {
           </div>
           <Route path="/" exact component={InstructorList} />
           <Route path="/add" component={AddInstructor} />
-        </div>
+          <Route path="/users/:id" component={InstructorProfile} />
+        </Container>
       </Router>
     );
   }
