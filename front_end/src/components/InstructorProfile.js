@@ -11,6 +11,15 @@ import {
   Form
 } from "semantic-ui-react";
 
+import AddReview from "./AddReview";
+
+const Review = props => (
+  <Comment>
+    <Comment.Author as="a">{props.review.author}</Comment.Author>
+    <Comment.Text>{props.review.review}</Comment.Text>
+  </Comment>
+);
+
 class InstructorProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -20,12 +29,13 @@ class InstructorProfile extends React.Component {
       title: "",
       rate: 0,
       rating: 0,
-      review: "",
-      avatar: ""
+      avatar: "",
+      reviews: []
     };
   }
 
   componentDidMount() {
+    console.log("instructor profile component did mount");
     axios
       .get("http://localhost:4000/instructors/" + this.props.match.params.id)
       .then(res => {
@@ -35,13 +45,31 @@ class InstructorProfile extends React.Component {
           title: res.data.title,
           rate: res.data.rate,
           rating: res.data.rating,
-          review: res.data.review,
           avatar: res.data.avatar
         });
       })
       .catch(err => {
         console.log(err);
       });
+  }
+
+  componentDidUpdate() {
+    axios
+      .get("http://localhost:4000/instructors/" + this.props.match.params.id)
+      .then(res => {
+        this.setState({
+          reviews: [...this.state.reviews, res.data.reviews]
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  instructorReviews() {
+    return this.state.reviews.map((currentReview, i) => {
+      return <Review review={currentReview} key={i} />;
+    });
   }
 
   render() {
@@ -54,7 +82,8 @@ class InstructorProfile extends React.Component {
         <Comment.Group>
           <Header as="h2">Reviews</Header>
 
-          <Comment />
+          {this.instructorReviews()}
+          <AddReview instructorId={this.props.match.params.id} />
         </Comment.Group>
       </Segment>
     );

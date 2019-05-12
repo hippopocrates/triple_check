@@ -10,10 +10,10 @@ class AddInstructor extends React.Component {
     this.state = {
       name: "",
       title: "",
-      rate: 0,
-      rating: 0,
-      review: "",
+      // rate: 0,
+      // rating: 0,
       avatar: "",
+      // reviews: [],
       redirect: false
     };
   }
@@ -30,48 +30,36 @@ class AddInstructor extends React.Component {
     });
   };
 
-  onChangeRate = e => {
-    this.setState({
-      rate: e.target.value
-    });
-  };
-
-  onChangeRating = e => {
-    this.setState({
-      rating: e.target.value
-    });
-  };
-
-  onChangeReview = e => {
-    this.setState({
-      review: e.target.value
-    });
-  };
-
   onSubmit = e => {
     e.preventDefault();
 
     const newInstructor = {
       name: this.state.name,
       title: this.state.title,
-      rate: this.state.rate,
-      rating: this.state.rating,
-      review: this.state.review,
+      // rate: 0,
+      // rating: 0,
       avatar: faker.image.avatar()
+      // reviews: []
     };
+
+    console.log(newInstructor);
 
     axios
       .post("http://localhost:4000/instructors/add", newInstructor)
       .then(res => {
-        console.log("axios res.data", res.data);
+        console.log("axios res.data add instructor", res.data);
+      })
+      .catch(err => {
+        console.log(err);
       });
 
     this.setState({
       name: "",
       title: "",
-      rate: "",
-      rating: 0,
-      review: "",
+      // rate: 0,
+      // rating: 0,
+      avatar: "",
+      // reviews: [],
       redirect: true
     });
   };
@@ -106,39 +94,6 @@ class AddInstructor extends React.Component {
             />
           </div>
 
-          <div className="field">
-            <label>Hourly Rate</label>
-            <input
-              type="number"
-              value={this.state.rate}
-              onChange={this.onChangeRate}
-            />
-          </div>
-
-          <div className="field">
-            <label style={{ marginRight: "10px" }}>Rating</label>
-
-            <input
-              type="number"
-              placeholder="rating"
-              min="1"
-              max="5"
-              style={{ width: "60px", display: "inline" }}
-              value={this.state.rating}
-              onChange={this.onChangeRating}
-            />
-          </div>
-
-          <div className="field">
-            <label>Review</label>
-            <textarea
-              rows="2"
-              type="text"
-              placeholder="Review"
-              value={this.state.review}
-              onChange={this.onChangeReview}
-            />
-          </div>
           <button type="submit" className="ui button">
             submit
           </button>

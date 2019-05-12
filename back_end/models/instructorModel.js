@@ -1,14 +1,21 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+let Reviews = new Schema({
+  author: String,
+  avatar: String,
+  rating: Number,
+  rate: Number,
+  review: String
+});
+
 let Instructor = new Schema({
-  name: { type: String },
-  title: { type: String },
-  rate: { type: Number },
-  rating: { type: Number },
-  review: { type: String },
-  avatar: { type: String },
-  reviews: { type: Array }
+  name: String,
+  title: String,
+  rate: Number,
+  rating: Number,
+  avatar: String,
+  reviews: [Reviews]
 });
 
 module.exports = mongoose.model("Instructor", Instructor);

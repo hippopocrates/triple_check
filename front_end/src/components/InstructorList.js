@@ -23,8 +23,6 @@ const Instructor = props => (
     <div className="content">
       <div className="header">{props.instructor.name}</div>
       <div className="meta">{props.instructor.title}</div>
-
-      <div className="description">{props.instructor.review}</div>
     </div>
     <div className="extra">
       Rating:

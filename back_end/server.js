@@ -27,23 +27,16 @@ instructorRoutes.route("/").get(function(req, res) {
       console.log(err);
     } else {
       console.log("instructors:", instructors);
+
+      console.log("instructors.reviews:", instructors.reviews);
       res.json(instructors);
     }
   });
 });
 
-instructorRoutes.route("/:id").get(function(req, res) {
-  Instructor.findById(req.params.id, function(err, instructor) {
-    res.json(instructor);
-  });
-});
-
-instructorRoutes.route("/:id").post(function(req, res) {
-  Instructor.findById(req.params.id, function(err, review) {});
-});
-
 instructorRoutes.route("/add").post(function(req, res) {
   let instructor = new Instructor(req.body);
+  console.log(req.body);
   instructor
     .save()
     .then(instructor => {
@@ -54,28 +47,35 @@ instructorRoutes.route("/add").post(function(req, res) {
     });
 });
 
-// instructorRoutes.route("/update/:id").post(function(req, res) {
-//   Instructor.findById(req.params.id, function(err, instructor) {
-//     if (!instructor) {
-//       res.status(400).send("data not found");
-//     } else {
-//       instructor.name = req.body.name;
-//       instructor.title = req.body.title;
-//       instructor.rate = req.body.rate;
-//       instructor.rating = req.body.rating;
-//       instructor.review = req.body.review;
-//
-//       instructor
-//         .save()
-//         .then(instructor => {
-//           res.json("instructor updated");
-//         })
-//         .catch(err => {
-//           res.status(400).send("update not possible");
-//         });
-//     }
-//   });
-// });
+instructorRoutes.route("/:id").patch(function(req, res) {
+  Instructor.findById(req.params.id, function(err, instructor) {
+    if (!instructor) {
+      res.status(400).send("data not found");
+    } else {
+      instructor.reviews = [...instructor.reviews, req.body.newReview];
+
+      instructor
+        .save()
+        .then(instructor => {
+          res.json("instructor updated");
+        })
+        .catch(err => {
+          res.status(400).send("update not possible");
+        });
+    }
+  });
+});
+
+instructorRoutes.route("/:id").get(function(req, res) {
+  Instructor.findById(req.params.id, function(err, instructor) {
+    console.log(instructor);
+    res.json(instructor);
+  });
+});
+
+instructorRoutes.route("/:id").post(function(req, res) {
+  Instructor.findById(req.params.id, function(err, review) {});
+});
 
 app.use("/instructors", instructorRoutes);
 

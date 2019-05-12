@@ -1,29 +1,38 @@
 import React from "react";
 import axios from "axios";
 import faker from "faker";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form, TextArea } from "semantic-ui-react";
 
 class AddReview extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log("addreview", props);
+
     this.state = {
-      name: "",
+      author: "",
+      avatar: "",
       rating: 0,
-      review: "",
-      avatar: ""
+      rate: 0,
+      review: ""
     };
   }
 
-  onChangeName = e => {
+  onChangeAuthor = e => {
     this.setState({
-      name: e.target.value
+      author: e.target.value
     });
   };
 
   onChangeRating = e => {
     this.setState({
       rating: e.target.value
+    });
+  };
+
+  onChangeRate = e => {
+    this.setState({
+      rate: e.target.value
     });
   };
 
@@ -36,21 +45,26 @@ class AddReview extends React.Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const newReview = {
-      name: this.state.name,
-      rating: this.state.rating,
-      review: this.state.review,
-      avatar: faker.image.avatar()
+    const params = {
+      newReview: {
+        author: this.state.author,
+        avatar: faker.image.avatar(),
+        rating: this.state.rating,
+        rate: this.state.rate,
+        review: this.state.review
+      },
+      id: this.props.instructorId
     };
 
     axios
-      .post(
-        "http://localhost:4000/instructors/" + this.props.match.params.id,
-        newReview
+      .patch(
+        "http://localhost:4000/instructors/" + this.props.instructorId,
+        params
       )
       .then(res => {
         console.log("axios res.data newReview:", res.data);
-      });
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -59,8 +73,8 @@ class AddReview extends React.Component {
         <Form.Field>
           <label>Name:</label>
           <input
-            value={this.state.name}
-            onChange={this.state.onChangeName}
+            value={this.state.author}
+            onChange={this.onChangeAuthor}
             placeholder="Name"
           />
         </Form.Field>
@@ -68,13 +82,21 @@ class AddReview extends React.Component {
           <label>Rating:</label>
           <input
             value={this.state.rating}
-            onChange={this.state.onChangeRating}
+            onChange={this.onChangeRating}
             placeholder="Rating"
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Hourly Rate:</label>
+          <input
+            value={this.state.rate}
+            onChange={this.onChangeRate}
+            placeholder="Hourly Rate"
           />
         </Form.Field>
         <Form.Field
           value={this.state.review}
-          onChange={this.state.onChangeReview}
+          onChange={this.onChangeReview}
           control={TextArea}
           label="Review"
           placeholder="Tell us about your experience..."
