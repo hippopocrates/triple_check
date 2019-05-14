@@ -6,9 +6,6 @@ import { Button, Form, TextArea } from "semantic-ui-react";
 class AddReview extends React.Component {
   constructor(props) {
     super(props);
-
-    console.log("addreview", props);
-
     this.state = {
       author: "",
       avatar: "",

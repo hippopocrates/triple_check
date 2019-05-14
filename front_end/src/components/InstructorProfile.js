@@ -23,7 +23,6 @@ const Review = props => (
 class InstructorProfile extends React.Component {
   constructor(props) {
     super(props);
-    console.log("props", props);
     this.state = {
       name: "",
       title: "",
@@ -39,25 +38,13 @@ class InstructorProfile extends React.Component {
     axios
       .get("http://localhost:4000/instructors/" + this.props.match.params.id)
       .then(res => {
-        console.log(res.data);
+        console.log("res.data", res.data);
         this.setState({
           name: res.data.name,
           title: res.data.title,
           rate: res.data.rate,
           rating: res.data.rating,
-          avatar: res.data.avatar
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  componentDidUpdate() {
-    axios
-      .get("http://localhost:4000/instructors/" + this.props.match.params.id)
-      .then(res => {
-        this.setState({
+          avatar: res.data.avatar,
           reviews: [...this.state.reviews, res.data.reviews]
         });
       })
@@ -68,6 +55,8 @@ class InstructorProfile extends React.Component {
 
   instructorReviews() {
     return this.state.reviews.map((currentReview, i) => {
+      console.log("this.state.reviews", this.state.reviews);
+      console.log("currentReview", currentReview);
       return <Review review={currentReview} key={i} />;
     });
   }
@@ -82,7 +71,7 @@ class InstructorProfile extends React.Component {
         <Comment.Group>
           <Header as="h2">Reviews</Header>
 
-          {this.instructorReviews()}
+          <div>{this.instructorReviews()}</div>
           <AddReview instructorId={this.props.match.params.id} />
         </Comment.Group>
       </Segment>

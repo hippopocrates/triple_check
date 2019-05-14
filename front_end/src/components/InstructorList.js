@@ -1,15 +1,7 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
 import axios from "axios";
 
 import { Rating } from "semantic-ui-react";
-
-import InstructorProfile from "./InstructorProfile";
 
 const Instructor = props => (
   <div
@@ -57,6 +49,8 @@ class InstructorList extends React.Component {
 
   instructorList() {
     return this.state.instructors.map((currentInstructor, i) => {
+      console.log("this.state.instructors", this.state.instructors);
+      console.log("currentInstructor", currentInstructor);
       return <Instructor instructor={currentInstructor} key={i} />;
     });
   }

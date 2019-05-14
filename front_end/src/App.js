@@ -25,9 +25,7 @@ class App extends Component {
                     <i className="search link icon" />
                   </div>
                 </div>
-                <a href="#" className="ui item">
-                  Logout
-                </a>
+                <div className="item">Logout</div>
               </div>
             </div>
           </div>
