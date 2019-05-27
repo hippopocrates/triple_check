@@ -66,7 +66,7 @@ class AddReview extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.onSubmit}>
+      <Form style={{ marginTop: "20px" }} onSubmit={this.onSubmit}>
         <Form.Field>
           <label>Name:</label>
           <input
