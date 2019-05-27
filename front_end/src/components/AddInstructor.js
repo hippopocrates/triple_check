@@ -37,7 +37,7 @@ class AddInstructor extends React.Component {
       name: this.state.name,
       title: this.state.title,
       // rate: 0,
-      // rating: 0,
+      rating: 0,
       avatar: faker.image.avatar()
       // reviews: []
     };
@@ -57,7 +57,7 @@ class AddInstructor extends React.Component {
       name: "",
       title: "",
       // rate: 0,
-      // rating: 0,
+      rating: 0,
       avatar: "",
       // reviews: [],
       redirect: true

@@ -12,6 +12,7 @@ import {
   Rating
 } from "semantic-ui-react";
 import faker from "faker";
+import StarRatings from "react-star-ratings";
 
 import AddReview from "./AddReview";
 
@@ -85,20 +86,17 @@ class InstructorProfile extends React.Component {
   }
 
   instructorRateLowToHigh() {
-    let lowestRate = 0;
-    let highestRate = 0;
-    this.state.reviews.map(currentReview => {});
-  }
-
-  instructorAverageRating() {
-    let totalRating = 0;
+    let rates = [];
     this.state.reviews.map(currentReview => {
-      totalRating += currentReview.rating;
+      rates.push(currentReview.rate);
     });
-    totalRating /= this.state.reviews.length;
-    console.log(Math.floor(totalRating));
-
-    return Math.floor(totalRating);
+    let highestRate = Math.max(...rates);
+    let lowestRate = Math.min(...rates);
+    return (
+      <Header as="h3">
+        Hourly Rate: {lowestRate} - {highestRate}
+      </Header>
+    );
   }
 
   instructorReviews() {
@@ -120,16 +118,12 @@ class InstructorProfile extends React.Component {
         <div>
           <Header as="h1">{this.state.name}</Header>
           <Header as="h2">{this.state.title}</Header>
-          <Header as="h3">Hourly Rate: {this.state.rate}</Header>
-          <Rating
-            icon="star"
-            defaultRating={
-              this.instructorAverageRating() === 4
-                ? this.instructorAverageRating()
-                : 2
-            }
-            maxRating={5}
-            disabled
+          {this.instructorRateLowToHigh()}
+          <StarRatings
+            rating={this.state.rating}
+            starRatedColor="blue"
+            numberOfStars={5}
+            name="rating"
           />
         </div>
         <Divider clearing />

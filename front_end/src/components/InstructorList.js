@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import StarRatings from "react-star-ratings";
 
 import { Rating } from "semantic-ui-react";
 
@@ -17,12 +18,14 @@ const Instructor = props => (
       <div className="meta">{props.instructor.title}</div>
     </div>
     <div className="extra">
-      Rating:
-      <Rating
-        icon="star"
-        defaultRating={props.instructor.rating}
-        maxRating={5}
-        disabled
+      <div style={{ marginRight: "10px", display: "inline" }}>Rating:</div>
+      <StarRatings
+        rating={props.instructor.rating}
+        starDimension="20px"
+        starSpacing="2px"
+        starRatedColor="blue"
+        numberOfStars={5}
+        name="rating"
       />
     </div>
   </div>

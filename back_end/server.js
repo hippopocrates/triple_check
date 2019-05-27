@@ -26,9 +26,6 @@ instructorRoutes.route("/").get(function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log("instructors:", instructors);
-
-      console.log("instructors.reviews:", instructors.reviews);
       res.json(instructors);
     }
   });
@@ -53,7 +50,9 @@ instructorRoutes.route("/:id").patch(function(req, res) {
       res.status(400).send("data not found");
     } else {
       instructor.reviews = [...instructor.reviews, req.body.newReview];
-
+      let totalRating =
+        Number(instructor.rating) + Number(req.body.newReview.rating);
+      instructor.rating = totalRating / instructor.reviews.length;
       instructor
         .save()
         .then(instructor => {

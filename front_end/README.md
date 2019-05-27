@@ -1,8 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
-In the project directory, you can run:
+In triple_check/back_end, run the following commands, each in a new tab:
+
+### `mongod`
+
+### `mongo`
+
+use instructors
+
+### `nodemon server.js`
+
+In triple_check/front_end, you can run:
 
 ### `npm start`
 
