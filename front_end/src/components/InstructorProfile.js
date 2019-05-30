@@ -22,7 +22,9 @@ const Review = props => (
     <Comment.Content>
       <Comment.Author as="a">{props.review.author}</Comment.Author>
       <Comment.Metadata>
-        <div>Today at 5:42PM</div>
+        <div>
+          {props.review.date} at {props.review.time}
+        </div>
         <div>
           {" "}
           <Rating
@@ -37,9 +39,6 @@ const Review = props => (
       <Comment.Text>{props.review.review}</Comment.Text>
       <Comment.Text />
       <Comment.Text>Hourly Rate: {props.review.rate}</Comment.Text>
-      <Comment.Actions>
-        <Comment.Action>Reply</Comment.Action>
-      </Comment.Actions>
     </Comment.Content>
   </Comment>
 );
@@ -90,13 +89,11 @@ class InstructorProfile extends React.Component {
     this.state.reviews.map(currentReview => {
       rates.push(currentReview.rate);
     });
+
     let highestRate = Math.max(...rates);
     let lowestRate = Math.min(...rates);
-    return (
-      <Header as="h3">
-        Hourly Rate: {lowestRate} - {highestRate}
-      </Header>
-    );
+    let hourlyRate = rates.length ? lowestRate + " - " + highestRate : "";
+    return <Header as="h3">Hourly Rate: {hourlyRate}</Header>;
   }
 
   instructorReviews() {

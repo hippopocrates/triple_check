@@ -6,7 +6,9 @@ let Reviews = new Schema({
   avatar: String,
   rating: Number,
   rate: Number,
-  review: String
+  review: String,
+  date: String,
+  time: String
 });
 
 let Instructor = new Schema({

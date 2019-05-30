@@ -11,7 +11,9 @@ class AddReview extends React.Component {
       avatar: "",
       rating: 0,
       rate: 0,
-      review: ""
+      review: "",
+      date: "",
+      time: ""
     };
   }
 
@@ -39,6 +41,55 @@ class AddReview extends React.Component {
     });
   };
 
+  setDate = () => {
+    let monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+
+    let currentDate = new Date();
+    let date = currentDate.getDate();
+    let month = currentDate.getMonth() + 1;
+    let year = currentDate.getFullYear();
+    let finalDate = monthNames[month] + " " + date + ", " + year;
+
+    this.setState({
+      date: finalDate
+    });
+
+    return finalDate;
+  };
+
+  setTime = () => {
+    let currentDate = new Date();
+    let hour = currentDate.getHours();
+    let minute = currentDate.getMinutes();
+
+    let finalTime = "";
+    if (hour > 12) {
+      hour -= 12;
+      finalTime = hour + ":" + minute + "pm";
+    } else {
+      finalTime = hour + ":" + minute + "am";
+    }
+
+    this.setState({
+      time: finalTime
+    });
+
+    return finalTime;
+  };
+
   onSubmit = e => {
     e.preventDefault();
 
@@ -48,10 +99,13 @@ class AddReview extends React.Component {
         avatar: faker.image.avatar(),
         rating: this.state.rating,
         rate: this.state.rate,
-        review: this.state.review
+        review: this.state.review,
+        date: this.setDate(),
+        time: this.setTime()
       },
       id: this.props.instructorId
     };
+    console.log(this.state.date);
 
     axios
       .patch(

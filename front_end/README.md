@@ -13,7 +13,7 @@ nodemon
 
 ## Deployment
 
-In triple_check/front_end, run the following commands, each in a new tab:
+In triple_check/back_end, run the following commands, each in a new tab:
 
 ### `mongod`
 
@@ -26,6 +26,8 @@ use instructors
 ```
 
 ### `nodemon server.js`
+
+In triple_check/front_end, run:
 
 ### `npm start`
 
