@@ -52,8 +52,6 @@ class InstructorList extends React.Component {
 
   instructorList() {
     return this.state.instructors.map((currentInstructor, i) => {
-      console.log("this.state.instructors", this.state.instructors);
-      console.log("currentInstructor", currentInstructor);
       return <Instructor instructor={currentInstructor} key={i} />;
     });
   }

@@ -96,6 +96,23 @@ class InstructorProfile extends React.Component {
     return <Header as="h3">Hourly Rate: {hourlyRate}</Header>;
   }
 
+  instructorRating() {
+    let totalRating = 0;
+    this.state.reviews.map(currentReview => {
+      totalRating += Number(currentReview.rating);
+    });
+    let averageRating = totalRating / this.state.reviews.length;
+
+    return (
+      <StarRatings
+        rating={isNaN(averageRating) ? 0 : averageRating}
+        starRatedColor="blue"
+        numberOfStars={5}
+        name="rating"
+      />
+    );
+  }
+
   instructorReviews() {
     return this.state.reviews.map((currentReview, i) => {
       return <Review review={currentReview} key={i} />;
@@ -123,12 +140,7 @@ class InstructorProfile extends React.Component {
           <Header as="h1">{this.state.name}</Header>
           <Header as="h2">{this.state.title}</Header>
           {this.instructorRateLowToHigh()}
-          <StarRatings
-            rating={this.state.rating}
-            starRatedColor="blue"
-            numberOfStars={5}
-            name="rating"
-          />
+          {this.instructorRating()}
         </div>
         <Divider clearing />
         <Comment.Group>

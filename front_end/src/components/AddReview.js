@@ -59,7 +59,7 @@ class AddReview extends React.Component {
 
     let currentDate = new Date();
     let date = currentDate.getDate();
-    let month = currentDate.getMonth() + 1;
+    let month = currentDate.getMonth();
     let year = currentDate.getFullYear();
     let finalDate = monthNames[month] + " " + date + ", " + year;
 
@@ -81,6 +81,8 @@ class AddReview extends React.Component {
     }
     if (hour > 12) {
       hour -= 12;
+      finalTime = hour + ":" + minute + "pm";
+    } else if (hour === 12) {
       finalTime = hour + ":" + minute + "pm";
     } else {
       finalTime = hour + ":" + minute + "am";

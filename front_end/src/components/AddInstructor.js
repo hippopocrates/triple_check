@@ -10,23 +10,22 @@ class AddInstructor extends React.Component {
     this.state = {
       name: "",
       title: "",
-      // rate: 0,
-      // rating: 0,
       avatar: "",
-      // reviews: [],
-      redirect: false
+      success: false
     };
   }
 
   onChangeName = e => {
     this.setState({
-      name: e.target.value
+      name: e.target.value,
+      success: false
     });
   };
 
   onChangeTitle = e => {
     this.setState({
-      title: e.target.value
+      title: e.target.value,
+      success: false
     });
   };
 
@@ -36,13 +35,9 @@ class AddInstructor extends React.Component {
     const newInstructor = {
       name: this.state.name,
       title: this.state.title,
-      // rate: 0,
       rating: 0,
       avatar: faker.image.avatar()
-      // reviews: []
     };
-
-    console.log(newInstructor);
 
     axios
       .post("http://localhost:4000/instructors/add", newInstructor)
@@ -56,18 +51,20 @@ class AddInstructor extends React.Component {
     this.setState({
       name: "",
       title: "",
-      // rate: 0,
       rating: 0,
       avatar: "",
-      // reviews: [],
-      redirect: true
+      success: true
     });
   };
 
   render() {
-    let redirect;
-    if (this.state.redirect) {
-      redirect = <Redirect to="/" />;
+    let success;
+    if (this.state.success) {
+      success = (
+        <p style={{ color: "green", marginTop: "7px" }}>
+          instructor successfully added!
+        </p>
+      );
     }
 
     return (
@@ -98,7 +95,7 @@ class AddInstructor extends React.Component {
             submit
           </button>
         </form>
-        {redirect}
+        {success}
       </div>
     );
   }
