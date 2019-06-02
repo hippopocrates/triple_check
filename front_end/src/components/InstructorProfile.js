@@ -102,6 +102,13 @@ class InstructorProfile extends React.Component {
     });
   }
 
+  updateInstructorReviews = newReview => {
+    this.setState(state => ({
+      reviews: [...state.reviews, newReview]
+    }));
+    this.toggleHidden();
+  };
+
   render() {
     return (
       <Segment>
@@ -134,7 +141,10 @@ class InstructorProfile extends React.Component {
             Add Review
           </Button>
           {!this.state.isHidden && (
-            <AddReview instructorId={this.props.match.params.id} />
+            <AddReview
+              instructorId={this.props.match.params.id}
+              updateInstructorReviews={this.updateInstructorReviews}
+            />
           )}
         </Comment.Group>
       </Segment>

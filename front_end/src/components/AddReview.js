@@ -76,6 +76,9 @@ class AddReview extends React.Component {
     let minute = currentDate.getMinutes();
 
     let finalTime = "";
+    if (minute < 10) {
+      minute = "0" + minute;
+    }
     if (hour > 12) {
       hour -= 12;
       finalTime = hour + ":" + minute + "pm";
@@ -105,7 +108,8 @@ class AddReview extends React.Component {
       },
       id: this.props.instructorId
     };
-    console.log(this.state.date);
+
+    this.props.updateInstructorReviews(params.newReview);
 
     axios
       .patch(
