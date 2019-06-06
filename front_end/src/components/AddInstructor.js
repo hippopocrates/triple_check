@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import faker from "faker";
-import { Redirect } from "react-router-dom";
 
 class AddInstructor extends React.Component {
   constructor(props) {
@@ -36,7 +35,7 @@ class AddInstructor extends React.Component {
       name: this.state.name,
       title: this.state.title,
       rating: 0,
-      avatar: faker.image.avatar()
+      avatar: faker.internet.avatar()
     };
 
     axios

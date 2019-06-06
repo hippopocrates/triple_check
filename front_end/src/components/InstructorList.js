@@ -2,8 +2,6 @@ import React from "react";
 import axios from "axios";
 import StarRatings from "react-star-ratings";
 
-import { Rating } from "semantic-ui-react";
-
 const Instructor = props => (
   <div
     onClick={() => (window.location = `/users/${props.instructor._id}`)}

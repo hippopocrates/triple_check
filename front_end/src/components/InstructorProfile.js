@@ -8,10 +8,8 @@ import {
   Segment,
   Button,
   Comment,
-  Form,
   Rating
 } from "semantic-ui-react";
-import faker from "faker";
 import StarRatings from "react-star-ratings";
 
 import AddReview from "./AddReview";
@@ -86,7 +84,7 @@ class InstructorProfile extends React.Component {
 
   instructorRateLowToHigh() {
     let rates = [];
-    this.state.reviews.map(currentReview => {
+    this.state.reviews.forEach(currentReview => {
       rates.push(currentReview.rate);
     });
 
@@ -98,7 +96,7 @@ class InstructorProfile extends React.Component {
 
   instructorRating() {
     let totalRating = 0;
-    this.state.reviews.map(currentReview => {
+    this.state.reviews.forEach(currentReview => {
       totalRating += Number(currentReview.rating);
     });
     let averageRating = totalRating / this.state.reviews.length;

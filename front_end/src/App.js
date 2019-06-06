@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import AddInstructor from "./components/AddInstructor";
 import InstructorProfile from "./components/InstructorProfile";
 import InstructorList from "./components/InstructorList";
+import Search from "./components/Search";
 
 class App extends Component {
   render() {
@@ -20,10 +21,11 @@ class App extends Component {
               </Link>
               <div className="right menu">
                 <div className="item">
-                  <div className="ui icon input">
+                  {/*             <div className="ui icon input">
                     <input type="text" placeholder="search..." />
                     <i className="search link icon" />
-                  </div>
+                  </div>*/}
+                  <Search />
                 </div>
                 <div className="item">Logout</div>
               </div>
